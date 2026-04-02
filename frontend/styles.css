@@ -1,0 +1,125 @@
+:root {
+  --page-bg-a: #f8fafc;
+  --page-bg-b: #ecfeff;
+  --ink: #0f172a;
+  --primary-start: #0ea5e9;
+  --primary-end: #0284c7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top right, #cffafe 0%, transparent 40%),
+    radial-gradient(circle at bottom left, #fde68a 0%, transparent 30%),
+    linear-gradient(150deg, var(--page-bg-a), var(--page-bg-b));
+}
+
+.bg-orb {
+  position: fixed;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(2px);
+  animation: float 8s ease-in-out infinite;
+}
+
+.orb-1 {
+  top: -4rem;
+  right: -3rem;
+  width: 16rem;
+  height: 16rem;
+  background: rgba(56, 189, 248, 0.25);
+}
+
+.orb-2 {
+  bottom: -4rem;
+  left: -2rem;
+  width: 14rem;
+  height: 14rem;
+  background: rgba(245, 158, 11, 0.2);
+  animation-delay: 1.5s;
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, var(--primary-start), var(--primary-end));
+  box-shadow: 0 12px 30px rgba(14, 165, 233, 0.28);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(14, 165, 233, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: linear-gradient(120deg, #0f766e, #0d9488);
+  box-shadow: 0 12px 30px rgba(13, 148, 136, 0.25);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(13, 148, 136, 0.28);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.tab-btn {
+  color: #334155;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+}
+
+.result-panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+  border: 1px solid rgba(148, 163, 184, 0.24);
+}
+
+.copy-btn {
+  transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+  transform: translateY(-1px);
+}
+
+.animate-fade-in {
+  animation: fadeSlide 0.25s ease-out;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}

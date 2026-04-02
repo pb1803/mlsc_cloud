@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conference Access</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="min-h-screen overflow-x-hidden">
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <main class="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl items-center px-4 py-12 sm:px-6">
+      <section class="w-full rounded-3xl border border-white/40 bg-white/75 p-5 shadow-2xl backdrop-blur-xl sm:p-8 lg:p-10">
+        <div class="space-y-6">
+          <p class="inline-flex items-center rounded-full bg-sky-100 px-3 py-1 text-xs font-bold tracking-wider text-sky-700">
+            Conference Credential Desk
+          </p>
+
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h1 class="text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl">Credential Access Portal</h1>
+            <div class="tab-wrap inline-flex rounded-xl bg-slate-100 p-1">
+              <button id="userTab" class="tab-btn active rounded-lg px-4 py-2 text-sm font-bold" type="button">User Dashboard</button>
+              <button id="adminTab" class="tab-btn rounded-lg px-4 py-2 text-sm font-bold" type="button">Admin Panel</button>
+            </div>
+          </div>
+
+          <section id="userPanel" class="grid gap-8 lg:grid-cols-2">
+            <div class="space-y-4">
+              <h2 class="text-2xl font-extrabold text-slate-900">Enter Your Access Code</h2>
+              <p class="text-sm text-slate-600">Enter your team ID and press Enter to get assigned credentials.</p>
+
+              <form id="userForm" class="space-y-4">
+                <label for="userCodeInput" class="block text-sm font-semibold text-slate-700">Team ID</label>
+                <input
+                  id="userCodeInput"
+                  name="code"
+                  type="text"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  maxlength="10"
+                  placeholder="Example: 1001"
+                  class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-lg font-semibold tracking-wide text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
+                  required
+                />
+                <button id="userSubmitButton" type="submit" class="btn-primary w-full rounded-xl px-4 py-3 text-sm font-bold tracking-wide text-white transition sm:text-base">
+                  Get Credentials
+                </button>
+              </form>
+
+              <p id="userStatusMessage" class="min-h-6 text-sm font-semibold"></p>
+            </div>
+
+            <div class="result-panel rounded-2xl p-5 sm:p-6">
+              <h3 class="text-lg font-bold text-slate-800">Assigned Credentials</h3>
+              <div id="userResultBox" class="mt-5 hidden space-y-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Username</p>
+                  <div class="mt-1 flex items-center justify-between gap-3 rounded-lg bg-white p-3">
+                    <span id="userUsernameValue" class="font-semibold text-slate-800"></span>
+                    <button type="button" data-copy="user-username" class="copy-btn rounded-md bg-emerald-100 px-2 py-1 text-xs font-bold text-emerald-800">Copy</button>
+                  </div>
+                </div>
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Password</p>
+                  <div class="mt-1 flex items-center justify-between gap-3 rounded-lg bg-white p-3">
+                    <span id="userPasswordValue" class="font-semibold text-slate-800"></span>
+                    <button type="button" data-copy="user-password" class="copy-btn rounded-md bg-emerald-100 px-2 py-1 text-xs font-bold text-emerald-800">Copy</button>
+                  </div>
+                </div>
+              </div>
+              <div id="userPlaceholderBox" class="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
+                Your credentials will appear here after successful ID verification.
+              </div>
+            </div>
+          </section>
+
+          <section id="adminPanel" class="hidden space-y-6">
+            <div class="grid gap-6 lg:grid-cols-2">
+              <div class="space-y-4">
+                <h2 class="text-2xl font-extrabold text-slate-900">Admin Credential Manager</h2>
+                <p class="text-sm text-slate-600">Enter team ID and press Enter. If ID exists, credentials load. If not, a new record is prepared with blank fields.</p>
+
+                <form id="adminLookupForm" class="space-y-4">
+                  <div>
+                    <label for="adminTokenInput" class="block text-sm font-semibold text-slate-700">Admin Token</label>
+                    <input id="adminTokenInput" type="password" autocomplete="off" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100" placeholder="Enter admin token" required />
+                  </div>
+
+                  <div>
+                    <label for="adminCodeInput" class="block text-sm font-semibold text-slate-700">Team ID</label>
+                    <input id="adminCodeInput" type="text" inputmode="numeric" maxlength="10" autocomplete="off" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-lg font-semibold tracking-wide text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100" placeholder="Example: 1010" required />
+                  </div>
+
+                  <button id="adminLookupButton" type="submit" class="btn-secondary w-full rounded-xl px-4 py-3 text-sm font-bold tracking-wide text-white transition sm:text-base">
+                    Find or Create ID
+                  </button>
+                </form>
+
+                <p id="adminStatusMessage" class="min-h-6 text-sm font-semibold"></p>
+              </div>
+
+              <div class="result-panel rounded-2xl p-5 sm:p-6">
+                <h3 class="text-lg font-bold text-slate-800">Credential Editor</h3>
+                <div id="adminEditorPlaceholder" class="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
+                  Search for a team ID first. Then enter username and password and save.
+                </div>
+
+                <form id="adminSaveForm" class="mt-4 hidden space-y-4">
+                  <div>
+                    <label class="block text-xs font-bold uppercase tracking-wide text-slate-500">Selected Team ID</label>
+                    <p id="selectedCodeLabel" class="mt-1 rounded-lg bg-slate-100 p-3 font-bold text-slate-800"></p>
+                  </div>
+
+                  <div>
+                    <label for="adminUsernameInput" class="block text-sm font-semibold text-slate-700">Username</label>
+                    <input id="adminUsernameInput" type="text" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100" placeholder="team_username" required />
+                  </div>
+
+                  <div>
+                    <label for="adminPasswordInput" class="block text-sm font-semibold text-slate-700">Password</label>
+                    <input id="adminPasswordInput" type="text" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100" placeholder="strong password" required />
+                  </div>
+
+                  <button id="adminSaveButton" type="submit" class="btn-primary w-full rounded-xl px-4 py-3 text-sm font-bold tracking-wide text-white transition sm:text-base">
+                    Save Credentials
+                  </button>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
